@@ -30,12 +30,16 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-// Validate form
+// Validate form on submit
 form.addEventListener('submit', function (event) {
   event.preventDefault();
   if (validateForm()) {
     console.log('Formulaire valide, prêt à soumettre.');
+    const firstName = form['first'].value.trim();
+    modalMessage.textContent = `Merci ${firstName}, votre formulaire a été soumis avec succès !`;
+    successModal.style.display = 'block';
     // Vous pouvez ajouter le code pour soumettre le formulaire ici
+    // form.submit(); // Si vous voulez réellement soumettre le formulaire
   }
 });
 

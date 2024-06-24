@@ -1,18 +1,12 @@
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const closeBtn = document.querySelector(".close-btn");
 const form = document.forms['reserve'];
 const formData = document.querySelectorAll(".formData");
+const successModal = document.getElementById('successModal');
+const closeModal = document.getElementsByClassName('close-modal')[0];
+const modalMessage = document.getElementById('modalMessage');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -23,11 +17,23 @@ function launchModal() {
 }
 
 // close modal event
-closeBtn.addEventListener("click", closeModal);
+closeBtn.addEventListener("click", closeFormModal);
 
 // close modal form
-function closeModal() {
+function closeFormModal() {
   modalbg.style.display = "none";
+}
+
+// Close the success modal when the user clicks on <span> (x)
+closeModal.onclick = function() {
+  successModal.style.display = 'none';
+}
+
+// Close the success modal when the user clicks anywhere outside of the modal
+window.onclick = function(event) {
+  if (event.target == successModal) {
+    successModal.style.display = 'none';
+  }
 }
 
 // Validate form on submit
@@ -35,7 +41,11 @@ form.addEventListener('submit', function (event) {
   event.preventDefault();
   if (validateForm()) {
     console.log('Formulaire valide, prêt à soumettre.');
+    const firstName = form['first'].value.trim().toUpperCase();
+    modalMessage.innerHTML = `Merci <strong>${firstName}</strong>, votre formulaire a été soumis avec succès !`;
+    successModal.style.display = 'block';
     // Vous pouvez ajouter le code pour soumettre le formulaire ici
+    // form.submit(); // Si vous voulez réellement soumettre le formulaire
   }
 });
 
