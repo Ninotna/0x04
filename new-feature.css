@@ -1,0 +1,50 @@
+/* Ajout d'un validateur css visuel */
+
+.formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 1rem;
+    color: #e54858;
+    display: block;
+    /* margin-top: 5px;
+    margin-bottom: 5px; */
+    text-align: right;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .formData[data-error-visible="true"]::after {
+    opacity: 1;
+  }
+  
+  .formData[data-error-visible="true"] .text-control {
+    border: 2px solid #e54858;
+  }
+
+  .validation-indicator {
+    display: none;
+    color: green;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+  .validation-indicator.valid {
+    display: inline;
+  }
+
+  /* Ajout d'un container pour afficher sur une ligne le checker */
+
+.input-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .validation-indicator {
+    display: none;
+    color: green;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+  .validation-indicator.valid {
+    display: inline;
+  }

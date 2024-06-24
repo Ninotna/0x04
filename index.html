@@ -5,6 +5,7 @@
     <title>Reservation</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="modal.css" />
+    <link rel="stylesheet" href="new-feature.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans"
@@ -60,49 +61,60 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit="return validateForm();"
+              novalidate 
             >
+            <!-- ajout de novalidate pour valider uniquement en js-->
               <div
                 class="formData">
-                <label for="first">Prénom</label><br>
+                <label for="first">Prénom</label>
+                <div class="input-container">
                 <input
                   class="text-control"
                   type="text"
                   id="first"
                   name="first"
                   minlength="2"
-                /><br>
+                />
+                <span class="validation-indicator" id="first-valid"><i class="fa fa-check"></i></span>
+                </div>
               </div>
               <div
                 class="formData">
-                <label for="last">Nom</label><br>
+                <label for="last">Nom</label>
+                <div class="input-container">
                 <input
                   class="text-control"
                   type="text"
                   id="last"
                   name="last"
-                /><br>
-              </div>
+                />
+                <span class="validation-indicator" id="last-valid"><i class="fa fa-check"></i></span>
+              </div></div>
               <div
                 class="formData">
-                <label for="email">E-mail</label><br>
+                <label for="email">E-mail</label>
+                <div class="input-container">
                 <input
                   class="text-control"
                   type="email"
                   id="email"
                   name="email"
-                /><br>
-              </div>
+                />
+                <span class="validation-indicator" id="email-valid"><i class="fa fa-check"></i></span>
+              </div></div>
               <div
                 class="formData">
-                <label for="birthdate">Date de naissance</label><br>
+                <label for="birthdate">Date de naissance</label>
+                <div class="input-container">
                 <input
                   class="text-control"
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                /><br>
-              </div>
+                />
+                <span class="validation-indicator" id="birthdate-valid"><i class="fa fa-check"></i></span>
+              </div></div>
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
@@ -215,6 +227,6 @@
         Copyright 2014 - 2022, GameOn Inc.
       </p>
     </footer>
-    <script src="modal.js"></script>
+    <script src="modal-v2.js"></script>
   </body>
 </html>
