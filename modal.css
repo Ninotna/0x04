@@ -216,9 +216,10 @@ input {
   margin-top: 7px;
   margin-bottom: 7px;
   text-align: right;
-  line-height: 0.3;
+  /* line-height: 0.3; */
   opacity: 0;
   transition: 0.3s;
+  text-align:left;
 }
 .formData[data-error-visible="true"]::after {
   opacity: 1;
@@ -528,20 +529,3 @@ footer {
 }
 
 
-/* Ajout d'un container pour afficher sur une ligne le checker */
-
-.input-container {
-  display: flex;
-  align-items: center;
-}
-
-.validation-indicator {
-  display: none;
-  color: green;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-.validation-indicator.valid {
-  display: inline;
-}

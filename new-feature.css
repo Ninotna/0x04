@@ -21,9 +21,10 @@
   font-size: 1rem; /* Définit la taille de la police à 1rem */
   color: #e54858; /* Définit la couleur du texte en rouge */
   display: block; /* Affiche le message d'erreur en bloc */
-  text-align: right; /* Aligne le texte à droite */
+  text-align:left; /* Affiche le texte à gauche */
   opacity: 0; /* Masque le message d'erreur par défaut */
   transition: opacity 0.3s; /* Ajoute une transition pour l'opacité de 0.3s */
+  white-space: pre-wrap; /* Permet de conserver les sauts de ligne et force les retours à la ligne */
 }
 
 .formData[data-error-visible="true"]::after { 
