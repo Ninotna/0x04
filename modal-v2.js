@@ -1,3 +1,13 @@
+function editNav() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
+
 // Éléments du DOM
 const modalbg = document.querySelector(".bground"); // Sélectionne l'élément de fond de la modale
 const modalBtn = document.querySelectorAll(".modal-btn"); // Sélectionne tous les boutons qui ouvrent la modale
