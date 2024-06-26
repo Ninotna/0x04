@@ -1,3 +1,22 @@
+/* Ajout d'un container pour afficher sur une ligne le checker */
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.validation-indicator {
+  display: none;
+  color: green;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.validation-indicator.valid {
+  display: inline;
+}
+
+
 /* Ajout d'un validateur css visuel */
 
 .formData[data-error]::after {
