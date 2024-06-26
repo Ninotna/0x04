@@ -163,14 +163,17 @@ function validateForm() {
     displayValid('email-valid'); // Affiche l'indicateur de validation pour l'email
   }
 
-  // Date de naissance
-  if (form['birthdate'].value.trim() === '') { // Vérifie si la date de naissance est vide
-    displayError('birthdate', 'Veuillez entrer votre date de naissance.'); // Affiche un message d'erreur pour la date de naissance
-    isValid = false; // Définit la validation à false
-  } else {
-    clearError('birthdate'); // Efface l'erreur pour la date de naissance
-    displayValid('birthdate-valid'); // Affiche l'indicateur de validation pour la date de naissance
-  }
+// Date de naissance
+if (form['birthdate'].value.trim() === '') { // Vérifie si la date de naissance est vide
+  displayError('birthdate', 'Veuillez entrer votre date de naissance.'); // Affiche un message d'erreur pour la date de naissance
+  isValid = false; // Définit la validation à false
+} else if (!isAdult(form['birthdate'].value.trim())) { // Vérifie si l'utilisateur a plus de 18 ans
+  displayError('birthdate', 'Vous devez avoir plus de 18 ans pour vous inscrire.'); // Affiche un message d'erreur si l'utilisateur a moins de 18 ans
+  isValid = false; // Définit la validation à false
+} else {
+  clearError('birthdate'); // Efface l'erreur pour la date de naissance
+  displayValid('birthdate-valid'); // Affiche l'indicateur de validation pour la date de naissance
+}
 
   // Nombre de tournois
   const quantity = form['quantity'].value.trim(); // Récupère et nettoie la valeur du nombre de tournois
@@ -261,4 +264,41 @@ function hideValid(elementId) {
 function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expression régulière pour valider l'email
   return re.test(email); // Retourne true si l'email est valide, sinon false
+}
+
+
+/**
+ * validateBirthdate - Valide le champ de la date de naissance et vérifie que l'utilisateur a plus de 18 ans
+ */
+function validateBirthdate() {
+  const birthdate = form['birthdate'].value.trim(); // Récupère et nettoie la valeur de la date de naissance
+  const regex = /^\d{4}-\d{2}-\d{2}$/; // Expression régulière pour vérifier le format YYYY-MM-DD
+  if (!regex.test(birthdate)) { // Vérifie si la date de naissance respecte le format
+    displayError('birthdate', 'Veuillez entrer votre date de naissance au format AAAA-MM-JJ.'); // Affiche un message d'erreur pour le format de la date de naissance
+  } else if (!isAdult(birthdate)) { // Vérifie si l'utilisateur a plus de 18 ans
+    displayError('birthdate', 'Vous devez avoir plus de 18 ans pour vous inscrire.'); // Affiche un message d'erreur si l'utilisateur a moins de 18 ans
+  } else {
+    clearError('birthdate'); // Efface l'erreur pour la date de naissance
+    displayValid('birthdate-valid'); // Affiche l'indicateur de validation pour la date de naissance
+  }
+}
+
+/**
+ * isAdult - Vérifie si la date de naissance correspond à un âge de 18 ans ou plus
+ * @arg: birthdate - La date de naissance au format YYYY-MM-DD
+ * Return: booléen - Retourne true si l'âge est de 18 ans ou plus, sinon false
+ */
+function isAdult(birthdate) {
+  const birthDate = new Date(birthdate); // Convertit la chaîne de date en objet Date
+  const today = new Date(); // Récupère la date actuelle
+  const age = today.getFullYear() - birthDate.getFullYear(); // Calcule l'âge en années
+  const monthDiff = today.getMonth() - birthDate.getMonth(); // Calcule la différence de mois
+  const dayDiff = today.getDate() - birthDate.getDate(); // Calcule la différence de jours
+
+  // Vérifie si l'utilisateur a déjà eu son anniversaire cette année
+  if (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)) {
+    return age >= 18; // Retourne true si l'utilisateur a 18 ans ou plus
+  } else {
+    return age > 18; // Retourne true si l'utilisateur a plus de 18 ans
+  }
 }
