@@ -40,13 +40,16 @@ function closeSuccessModal() {
 
 // Fonction pour valider le prénom
 function validateFirstName() {
+  let isValid = true;
   const firstName = form['first'].value.trim(); // Récupère et nettoie la valeur du prénom
   if (firstName.length < 2) { // Vérifie si la longueur du prénom est inférieure à 2 caractères
     displayError('first', 'Le prénom doit contenir au moins 2 caractères.'); // Affiche un message d'erreur pour le prénom
   } else {
+    isValid = false;
     clearError('first'); // Efface l'erreur pour le prénom
     displayValid('first-valid'); // Affiche l'indicateur de validation pour le prénom
   }
+  return isValid;
 }
 
 // Fonction pour valider le nom
@@ -71,6 +74,12 @@ function validateEmailField() {
   }
 }
 
+// Fonction pour valider une adresse email avec une expression régulière
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expression régulière pour valider l'email
+  return re.test(email); // Retourne true si l'email est valide, sinon false
+}
+
 // Fonction pour valider la date de naissance et vérifier que l'utilisateur a plus de 18 ans
 function validateBirthdate() {
   const birthdate = form['birthdate'].value.trim(); // Récupère et nettoie la valeur de la date de naissance
@@ -84,6 +93,22 @@ function validateBirthdate() {
     displayValid('birthdate-valid'); // Affiche l'indicateur de validation pour la date de naissance
   }
 }
+
+  // Fonction pour vérifier si la date de naissance correspond à un âge de 18 ans ou plus
+  function isAdult(birthdate) {
+    const birthDate = new Date(birthdate); // Convertit la chaîne de date en objet Date
+    const today = new Date(); // Récupère la date actuelle
+    const age = today.getFullYear() - birthDate.getFullYear(); // Calcule l'âge en années
+    const monthDiff = today.getMonth() - birthDate.getMonth(); // Calcule la différence de mois
+    const dayDiff = today.getDate() - birthDate.getDate(); // Calcule la différence de jours
+
+    // Vérifie si l'utilisateur a déjà eu son anniversaire cette année
+    if (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)) {
+      return age >= 18; // Retourne true si l'utilisateur a 18 ans ou plus
+    } else {
+      return age > 18; // Retourne true si l'utilisateur a plus de 18 ans
+    }
+  }
 
 // Fonction pour valider le nombre de tournois
 function validateQuantity() {
@@ -101,13 +126,8 @@ function validateForm() {
   let isValid = true; // Initialise la variable de validation à true
 
   // Prénom
-  if (form['first'].value.trim().length < 2) { // Vérifie si la longueur du prénom est inférieure à 2 caractères
-    displayError('first', 'Le prénom doit contenir au moins 2 caractères.'); // Affiche un message d'erreur pour le prénom
-    isValid = false; // Définit la validation à false
-  } else {
-    clearError('first'); // Efface l'erreur pour le prénom
-    displayValid('first-valid'); // Affiche l'indicateur de validation pour le prénom
-  }
+
+isValid = validateFirstName();
 
   // Nom
   if (form['last'].value.trim().length < 2) { // Vérifie si la longueur du nom est inférieure à 2 caractères
@@ -139,8 +159,11 @@ function validateForm() {
     displayValid('birthdate-valid'); // Affiche l'indicateur de validation pour la date de naissance
   }
 
+
+
   // Nombre de tournois
   const quantity = form['quantity'].value.trim(); // Récupère et nettoie la valeur du nombre de tournois
+  console.log(quantity);
   if (isNaN(quantity) || quantity === '') { // Vérifie si le nombre de tournois n'est pas un nombre ou est vide
     displayError('quantity', 'Veuillez entrer un nombre valide.'); // Affiche un message d'erreur pour le nombre de tournois
     isValid = false; // Définit la validation à false
@@ -193,8 +216,9 @@ function displayError(elementId, message) {
 function clearError(elementId) {
   const element = document.getElementById(elementId); // Sélectionne l'élément par son ID
   if (element) { // Vérifie si l'élément existe
-    element.closest('.formData').removeAttribute('data-error'); // Supprime l'attribut d'erreur
-    element.closest('.formData').removeAttribute('data-error-visible'); // Supprime l'attribut de visibilité de l'erreur
+    const formData = element.closest('.formData');
+    formData.removeAttribute('data-error'); // Supprime l'attribut d'erreur
+    formData.removeAttribute('data-error-visible'); // Supprime l'attribut de visibilité de l'erreur
   }
 }
 
@@ -214,30 +238,12 @@ function hideValid(elementId) {
   }
 }
 
-// Fonction pour valider une adresse email avec une expression régulière
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expression régulière pour valider l'email
-  return re.test(email); // Retourne true si l'email est valide, sinon false
-}
 
-// Fonction pour vérifier si la date de naissance correspond à un âge de 18 ans ou plus
-function isAdult(birthdate) {
-  const birthDate = new Date(birthdate); // Convertit la chaîne de date en objet Date
-  const today = new Date(); // Récupère la date actuelle
-  const age = today.getFullYear() - birthDate.getFullYear(); // Calcule l'âge en années
-  const monthDiff = today.getMonth() - birthDate.getMonth(); // Calcule la différence de mois
-  const dayDiff = today.getDate() - birthDate.getDate(); // Calcule la différence de jours
 
-  // Vérifie si l'utilisateur a déjà eu son anniversaire cette année
-  if (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)) {
-    return age >= 18; // Retourne true si l'utilisateur a 18 ans ou plus
-  } else {
-    return age > 18; // Retourne true si l'utilisateur a plus de 18 ans
-  }
-}
+
 
 // Ajout des écouteurs d'événements
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Événement pour lancer la modale
   modalBtn.forEach((btn) => btn.addEventListener("click", launchModal)); // Ajoute des écouteurs d'événements de clic à tous les boutons de la modale pour lancer la modale
 
@@ -245,10 +251,10 @@ document.addEventListener('DOMContentLoaded', function() {
   closeBtn.addEventListener("click", closeFormModal); // Ajoute un écouteur d'événement de clic au bouton de fermeture pour fermer la modale
 
   // Ferme la modale de succès lorsque l'utilisateur clique sur <span> (x)
-  closeModalBtn.onclick = closeSuccessModal; // Utilise une fonction partagée pour fermer la modale de succès
+  closeModalBtn.addEventListener("click", closeSuccessModal); // Utilise une fonction partagée pour fermer la modale de succès
 
   // Ferme la modale de succès lorsque l'utilisateur clique n'importe où en dehors de la modale
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == successModal) { // Vérifie si l'utilisateur a cliqué en dehors de la modale de succès
       closeSuccessModal(); // Utilise une fonction partagée pour fermer la modale de succès
     }
@@ -270,8 +276,9 @@ document.addEventListener('DOMContentLoaded', function() {
   form['quantity'].addEventListener('blur', validateQuantity); // Ajoute un écouteur d'événement de perte de focus pour valider la quantité
 
   // Valider le formulaire lors de la soumission
-  form.addEventListener('submit', function(event) {
+  form.addEventListener('submit', function (event) {
     event.preventDefault(); // Empêche le comportement par défaut de soumission du formulaire
+    console.log(validateForm());
     if (validateForm()) { // Si la validation du formulaire est réussie
       console.log('Formulaire valide, prêt à soumettre.'); // Affiche un message dans la console
       const firstName = form['first'].value.trim().toUpperCase(); // Récupère et nettoie la valeur du prénom en majuscule
