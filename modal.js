@@ -23,12 +23,14 @@ function editNav() {
 function launchModal() {
   modalbg.style.display = "block"; // Définit le style d'affichage du fond de la modale sur 'block' pour l'afficher
   document.body.classList.add('no-scroll'); // Ajoute la classe no-scroll à l'élément body pour désactiver le défilement
+  document.body.classList.add('modal-open'); // Ajoute la classe modal-open à l'élément body pour afficher l'overlay
 }
 
 // Fonction pour fermer la modale de formulaire
 function closeFormModal() {
   modalbg.style.display = "none"; // Définit le style d'affichage du fond de la modale sur 'none' pour le cacher
   document.body.classList.remove('no-scroll'); // Retire la classe no-scroll de l'élément body pour réactiver le défilement
+  document.body.classList.remove('modal-open'); // Retire la classe modal-open de l'élément body pour masquer l'overlay
 }
 
 // Fonction pour fermer la modale de succès et réactiver la page principale
@@ -36,20 +38,20 @@ function closeSuccessModal() {
   successModal.style.display = 'none'; // Masque la modale de succès
   modalbg.style.display = "none"; // Masque également l'élément de fond de la modale
   document.body.classList.remove('no-scroll'); // Réactive le défilement de la page
+  document.body.classList.remove('modal-open'); // Retire la classe modal-open de l'élément body pour masquer l'overlay
 }
 
 // Fonction pour valider le prénom
 function validateFirstName() {
-  let isValid = true;
   const firstName = form['first'].value.trim(); // Récupère et nettoie la valeur du prénom
   if (firstName.length < 2) { // Vérifie si la longueur du prénom est inférieure à 2 caractères
     displayError('first', 'Le prénom doit contenir au moins 2 caractères.'); // Affiche un message d'erreur pour le prénom
+    return false;
   } else {
-    isValid = false;
     clearError('first'); // Efface l'erreur pour le prénom
     displayValid('first-valid'); // Affiche l'indicateur de validation pour le prénom
+    return true;
   }
-  return isValid;
 }
 
 // Fonction pour valider le nom
@@ -57,9 +59,11 @@ function validateLastName() {
   const lastName = form['last'].value.trim(); // Récupère et nettoie la valeur du nom
   if (lastName.length < 2) { // Vérifie si la longueur du nom est inférieure à 2 caractères
     displayError('last', 'Le nom doit contenir au moins 2 caractères.'); // Affiche un message d'erreur pour le nom
+    return false;
   } else {
     clearError('last'); // Efface l'erreur pour le nom
     displayValid('last-valid'); // Affiche l'indicateur de validation pour le nom
+    return true;
   }
 }
 
@@ -68,9 +72,11 @@ function validateEmailField() {
   const email = form['email'].value.trim(); // Récupère et nettoie la valeur de l'email
   if (!validateEmail(email)) { // Vérifie si l'email est valide
     displayError('email', 'Veuillez entrer une adresse email valide.'); // Affiche un message d'erreur pour l'email
+    return false;
   } else {
     clearError('email'); // Efface l'erreur pour l'email
     displayValid('email-valid'); // Affiche l'indicateur de validation pour l'email
+    return true;
   }
 }
 
@@ -86,120 +92,69 @@ function validateBirthdate() {
   const regex = /^\d{4}-\d{2}-\d{2}$/; // Expression régulière pour vérifier le format YYYY-MM-DD
   if (!regex.test(birthdate)) { // Vérifie si la date de naissance respecte le format
     displayError('birthdate', 'Veuillez entrer votre date de naissance au format AAAA-MM-JJ.'); // Affiche un message d'erreur pour le format de la date de naissance
+    return false;
   } else if (!isAdult(birthdate)) { // Vérifie si l'utilisateur a plus de 18 ans
     displayError('birthdate', 'Vous devez avoir plus de 18 ans pour vous inscrire.'); // Affiche un message d'erreur si l'utilisateur a moins de 18 ans
+    return false;
   } else {
     clearError('birthdate'); // Efface l'erreur pour la date de naissance
     displayValid('birthdate-valid'); // Affiche l'indicateur de validation pour la date de naissance
+    return true;
   }
 }
 
-  // Fonction pour vérifier si la date de naissance correspond à un âge de 18 ans ou plus
-  function isAdult(birthdate) {
-    const birthDate = new Date(birthdate); // Convertit la chaîne de date en objet Date
-    const today = new Date(); // Récupère la date actuelle
-    const age = today.getFullYear() - birthDate.getFullYear(); // Calcule l'âge en années
-    const monthDiff = today.getMonth() - birthDate.getMonth(); // Calcule la différence de mois
-    const dayDiff = today.getDate() - birthDate.getDate(); // Calcule la différence de jours
+// Fonction pour vérifier si la date de naissance correspond à un âge de 18 ans ou plus
+function isAdult(birthdate) {
+  const birthDate = new Date(birthdate); // Convertit la chaîne de date en objet Date
+  const today = new Date(); // Récupère la date actuelle
+  const age = today.getFullYear() - birthDate.getFullYear(); // Calcule l'âge en années
+  const monthDiff = today.getMonth() - birthDate.getMonth(); // Calcule la différence de mois
+  const dayDiff = today.getDate() - birthDate.getDate(); // Calcule la différence de jours
 
-    // Vérifie si l'utilisateur a déjà eu son anniversaire cette année
-    if (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)) {
-      return age >= 18; // Retourne true si l'utilisateur a 18 ans ou plus
-    } else {
-      return age > 18; // Retourne true si l'utilisateur a plus de 18 ans
-    }
+  // Vérifie si l'utilisateur a déjà eu son anniversaire cette année
+  if (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)) {
+    return age >= 18; // Retourne true si l'utilisateur a 18 ans ou plus
+  } else {
+    return age > 18; // Retourne true si l'utilisateur a plus de 18 ans
   }
+}
 
 // Fonction pour valider le nombre de tournois
 function validateQuantity() {
   const quantity = form['quantity'].value.trim(); // Récupère et nettoie la valeur du nombre de tournois
   if (isNaN(quantity) || quantity === '') { // Vérifie si le nombre de tournois n'est pas un nombre ou est vide
     displayError('quantity', 'Veuillez entrer un nombre valide.'); // Affiche un message d'erreur pour le nombre de tournois
+    return false;
   } else {
     clearError('quantity'); // Efface l'erreur pour le nombre de tournois
     displayValid('quantity-valid'); // Affiche l'indicateur de validation pour le nombre de tournois
+    return true;
+  }
+}
+
+// Conditions générales
+function validateTerms() {
+  const termsAccepted = form['checkbox1'].checked; // Vérifie si la case des conditions générales est cochée
+  if (!termsAccepted) { // Vérifie si la case des conditions générales n'est pas cochée
+    displayError('checkbox1', 'Vous devez accepter les conditions d\'utilisation.'); // Affiche un message d'erreur pour les conditions générales
+    return false; // Définit la validation à false
+  } else {
+    clearError('checkbox1'); // Efface l'erreur pour les conditions générales
+    displayValid('checkbox1-valid'); // Affiche l'indicateur de validation pour les conditions générales
+    return true; // Retourne true pour indiquer que les conditions sont acceptées
   }
 }
 
 // Fonction pour valider tous les champs du formulaire
 function validateForm() {
-  let isValid = true; // Initialise la variable de validation à true
-
-  // Prénom
-
-isValid = validateFirstName();
-
-  // Nom
-  if (form['last'].value.trim().length < 2) { // Vérifie si la longueur du nom est inférieure à 2 caractères
-    displayError('last', 'Le nom doit contenir au moins 2 caractères.'); // Affiche un message d'erreur pour le nom
-    isValid = false; // Définit la validation à false
-  } else {
-    clearError('last'); // Efface l'erreur pour le nom
-    displayValid('last-valid'); // Affiche l'indicateur de validation pour le nom
-  }
-
-  // Email
-  if (!validateEmail(form['email'].value.trim())) { // Vérifie si l'email est valide
-    displayError('email', 'Veuillez entrer une adresse email valide.'); // Affiche un message d'erreur pour l'email
-    isValid = false; // Définit la validation à false
-  } else {
-    clearError('email'); // Efface l'erreur pour l'email
-    displayValid('email-valid'); // Affiche l'indicateur de validation pour l'email
-  }
-
-  // Date de naissance
-  if (form['birthdate'].value.trim() === '') { // Vérifie si la date de naissance est vide
-    displayError('birthdate', 'Veuillez entrer votre date de naissance.'); // Affiche un message d'erreur pour la date de naissance
-    isValid = false; // Définit la validation à false
-  } else if (!isAdult(form['birthdate'].value.trim())) { // Vérifie si l'utilisateur a plus de 18 ans
-    displayError('birthdate', 'Vous devez avoir plus de 18 ans pour vous inscrire.'); // Affiche un message d'erreur si l'utilisateur a moins de 18 ans
-    isValid = false; // Définit la validation à false
-  } else {
-    clearError('birthdate'); // Efface l'erreur pour la date de naissance
-    displayValid('birthdate-valid'); // Affiche l'indicateur de validation pour la date de naissance
-  }
-
-
-
-  // Nombre de tournois
-  const quantity = form['quantity'].value.trim(); // Récupère et nettoie la valeur du nombre de tournois
-  console.log(quantity);
-  if (isNaN(quantity) || quantity === '') { // Vérifie si le nombre de tournois n'est pas un nombre ou est vide
-    displayError('quantity', 'Veuillez entrer un nombre valide.'); // Affiche un message d'erreur pour le nombre de tournois
-    isValid = false; // Définit la validation à false
-  } else {
-    clearError('quantity'); // Efface l'erreur pour le nombre de tournois
-    displayValid('quantity-valid'); // Affiche l'indicateur de validation pour le nombre de tournois
-  }
-
-  // Bouton radio sélectionné
-  let locationSelected = false; // Initialise la variable de sélection de lieu à false
-  const locationInputs = form['location']; // Récupère tous les boutons radio de sélection de lieu
-  for (let i = 0; i < locationInputs.length; i++) { // Boucle à travers les boutons radio
-    if (locationInputs[i].checked) { // Vérifie si un bouton radio est sélectionné
-      locationSelected = true; // Définit la sélection de lieu à true
-      break; // Sort de la boucle
-    }
-  }
-  if (!locationSelected) { // Vérifie si aucun bouton radio n'est sélectionné
-    displayError('location1', 'Veuillez sélectionner un tournoi.'); // Affiche un message d'erreur pour la sélection de lieu
-    isValid = false; // Définit la validation à false
-  } else {
-    clearError('location1'); // Efface l'erreur pour la sélection de lieu
-    displayValid('location1-valid'); // Affiche l'indicateur de validation pour la sélection de lieu
-  }
-
-  // Conditions générales
-  const termsAccepted = form['checkbox1'].checked; // Vérifie si la case des conditions générales est cochée
-  if (!termsAccepted) { // Vérifie si la case des conditions générales n'est pas cochée
-    displayError('checkbox1', 'Vous devez accepter les conditions d\'utilisation.'); // Affiche un message d'erreur pour les conditions générales
-    isValid = false; // Définit la validation à false
-  } else {
-    clearError('checkbox1'); // Efface l'erreur pour les conditions générales
-    displayValid('checkbox1-valid'); // Affiche l'indicateur de validation pour les conditions générales
-  }
-
-  return isValid; // Retourne la validité du formulaire
+  let isValid = true;
+  isValid &= validateFirstName(); // Valide le prénom
+  isValid &= validateLastName(); // Valide le nom
+  isValid &= validateEmailField(); // Valide l'email
+  isValid &= validateBirthdate(); // Valide la date de naissance
+  isValid &= validateQuantity(); // Valide le nombre de tournois
+  isValid &= validateTerms(); // Valide les conditions générales
+  return !!isValid; // Retourne true si tout est valide, sinon false
 }
 
 // Fonction pour afficher une erreur
@@ -238,10 +193,6 @@ function hideValid(elementId) {
   }
 }
 
-
-
-
-
 // Ajout des écouteurs d'événements
 document.addEventListener('DOMContentLoaded', function () {
   // Événement pour lancer la modale
@@ -278,13 +229,36 @@ document.addEventListener('DOMContentLoaded', function () {
   // Valider le formulaire lors de la soumission
   form.addEventListener('submit', function (event) {
     event.preventDefault(); // Empêche le comportement par défaut de soumission du formulaire
-    console.log(validateForm());
-    if (validateForm()) { // Si la validation du formulaire est réussie
-      console.log('Formulaire valide, prêt à soumettre.'); // Affiche un message dans la console
-      const firstName = form['first'].value.trim().toUpperCase(); // Récupère et nettoie la valeur du prénom en majuscule
-      modalMessage.innerHTML = `Merci <strong>${firstName}</strong>, votre formulaire a été soumis avec succès !`; // Affiche un message de succès avec le prénom
-      modalForm.style.display = 'none'; // Masque la modale de formulaire
-      successModal.style.display = 'block'; // Affiche la modale avec le message de succès
+    const invalidFields = [];
+    
+    if (!validateFirstName()) {
+        invalidFields.push('Prénom');
     }
-  });
+    if (!validateLastName()) {
+        invalidFields.push('Nom');
+    }
+    if (!validateEmailField()) {
+        invalidFields.push('Email');
+    }
+    if (!validateBirthdate()) {
+        invalidFields.push('Date de naissance');
+    }
+    if (!validateQuantity()) {
+        invalidFields.push('Quantité de tournois');
+    }
+    if (!validateTerms()) {
+        invalidFields.push('Conditions générales');
+    }
+
+    if (invalidFields.length === 0) { // Si la validation du formulaire est réussie
+        const firstName = form['first'].value.trim().toUpperCase(); // Récupère et nettoie la valeur du prénom en majuscule
+        modalMessage.innerHTML = `Merci <strong>${firstName}</strong>, votre formulaire a été soumis avec succès !`; // Affiche un message de succès avec le prénom
+        modalForm.style.display = 'none'; // Masque la modale de formulaire
+        successModal.style.display = 'block'; // Affiche la modale avec le message de succès
+        console.log('Formulaire soumis avec succès');
+    } else {
+        console.log(`Le formulaire n'est pas valide. Champs non valides : ${invalidFields.join(', ')}`);
+    }
+});
+
 });
