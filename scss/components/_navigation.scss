@@ -2,8 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 33px 0;
   background-color: #fff;
+  flex-wrap: wrap;
+
+  .responsive {
+    flex-direction: row;
+  }
 
   .header-logo {
     display: flex;
@@ -30,6 +35,10 @@
       background-color: #ff0000;
       color: #ffffff;
       border-radius: 15px;
+      @media screen and (min-width: 768px) {
+
+          display: none;
+        }
     }
 
     &.active {
@@ -47,9 +56,16 @@
     a {
       display: none;
     }
+
     .icon {
       display: block;
-      margin-left: auto; // Ensures the icon stays at the right edge
+      // margin-left: auto; // Ensures the icon stays at the right edge
+    }
+
+    img#logo {
+      width: 103px;
+      height: 19px;
+      margin-top: -15px;
     }
   }
 
@@ -57,9 +73,12 @@
     a {
       display: none;
     }
+
     .icon {
       margin-top: -15px;
+      margin-left: 0px; // Ensures the icon stays at the right edge
     }
+
     img#logo {
       width: 103px;
       height: 19px;
@@ -69,16 +88,45 @@
 
   &.responsive {
     flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: nowrap;
 
-    .icon {
-      align-self: flex-end;
+
+    .icon .fa {
+      align-self: center;
+          @media screen and (min-width: 768px) {
+      display: none;
     }
+    }
+
+    .icon .fa a {
+      display: block;
+      float: none;
+      text-align: left;
+          @media screen and (min-width: 768px) {
+      display: none;
+    }
+    }
+
 
     a {
       display: block;
       float: none;
       text-align: left;
+    }
+
+    .main-navbar {
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      @media screen and (max-width: 800px) {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+
+    img#logo {
+      padding-right: 0px;
     }
   }
 }

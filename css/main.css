@@ -17,8 +17,6 @@ body {
   flex-direction: column;
   font-family: var(--font-default);
   font-size: 18px;
-  max-width: 1300px;
-  margin: 0 auto;
 }
 
 p {
@@ -39,12 +37,22 @@ img {
     opacity: 1;
   }
 }
+.container-center {
+  max-width: 1080px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
 .topnav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 33px 0;
   background-color: #fff;
+  flex-wrap: wrap;
+}
+.topnav .responsive {
+  flex-direction: row;
 }
 .topnav .header-logo {
   display: flex;
@@ -70,6 +78,11 @@ img {
   color: #ffffff;
   border-radius: 15px;
 }
+@media screen and (min-width: 768px) {
+  .topnav a:hover {
+    display: none;
+  }
+}
 .topnav a.active {
   background-color: #ff0000;
   color: #ffffff;
@@ -84,7 +97,11 @@ img {
   }
   .topnav .icon {
     display: block;
-    margin-left: auto;
+  }
+  .topnav img#logo {
+    width: 103px;
+    height: 19px;
+    margin-top: -15px;
   }
 }
 @media screen and (max-width: 540px) {
@@ -93,6 +110,7 @@ img {
   }
   .topnav .icon {
     margin-top: -15px;
+    margin-left: 0px;
   }
   .topnav img#logo {
     width: 103px;
@@ -102,15 +120,44 @@ img {
 }
 .topnav.responsive {
   flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: nowrap;
 }
-.topnav.responsive .icon {
-  align-self: flex-end;
+.topnav.responsive .icon .fa {
+  align-self: center;
+}
+@media screen and (min-width: 768px) {
+  .topnav.responsive .icon .fa {
+    display: none;
+  }
+}
+.topnav.responsive .icon .fa a {
+  display: block;
+  float: none;
+  text-align: left;
+}
+@media screen and (min-width: 768px) {
+  .topnav.responsive .icon .fa a {
+    display: none;
+  }
 }
 .topnav.responsive a {
   display: block;
   float: none;
   text-align: left;
+}
+.topnav.responsive .main-navbar {
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+@media screen and (max-width: 800px) {
+  .topnav.responsive .main-navbar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+.topnav.responsive img#logo {
+  padding-right: 0px;
 }
 
 .modal-btn, .button, .btn-signup {
@@ -177,6 +224,7 @@ img {
   position: relative;
   color: #fff;
   padding-top: 10px;
+  height: 100%;
 }
 
 .modal-body {
@@ -500,7 +548,12 @@ input {
   grid-template-columns: repeat(12, 1fr);
   overflow: hidden;
   box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
-  margin-bottom: 10px;
+  margin: 84px 0 10px 0;
+}
+@media screen and (max-width: 800px) {
+  .hero-section {
+    margin: 0px 0 10px 0;
+  }
 }
 .hero-section .hero-content {
   padding: 51px 67px;
@@ -517,7 +570,7 @@ input {
   height: 100%;
   background: #232323;
   position: absolute;
-  right: -80px;
+  right: -50px;
   top: 0;
 }
 .hero-section .hero-content > * {
@@ -525,15 +578,46 @@ input {
   z-index: 1;
 }
 .hero-section .hero-content .hero-headline {
-  font-size: 6rem;
   font-weight: normal;
   white-space: nowrap;
+  color: #FFF;
+  font-family: "DM Sans";
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+@media screen and (max-width: 800px) {
+  .hero-section .hero-content .hero-headline {
+    color: #000;
+    font-family: "DM Sans";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
 }
 .hero-section .hero-content .hero-text {
   width: 100%;
   font-weight: normal;
   margin-top: 20px;
   padding: 0;
+  color: #FFF;
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+@media screen and (max-width: 800px) {
+  .hero-section .hero-content .hero-text {
+    color: #000;
+    font-family: "DM Sans";
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 }
 .hero-section .hero-content .btn-signup {
   outline: none;
@@ -569,8 +653,12 @@ input {
     display: none;
   }
   .hero-section .hero-headline {
-    font-size: 4.5rem;
-    white-space: normal;
+    color: #000;
+    font-family: "DM Sans";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
   .hero-section .hero-text {
     width: unset;
