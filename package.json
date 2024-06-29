@@ -1,0 +1,16 @@
+{
+  "name": "0x04",
+  "version": "1.0.0",
+  "description": "1. Forkez ce repo ; 2. Il est conseillé d'utiliser VisualStudio Code et vous pouvez utiliser Docker, mais ce n'est pas obligatoire ; 3. Il n'y a aucune dépendance ; 4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.",
+  "main": "modal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch scss/main.scss css/main.css",
+    "sass:watch": "sass --watch sass/index.scss:css/main.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.77.6"
+  }
+}

@@ -1,0 +1,84 @@
+.topnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff;
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .main-navbar {
+    display: flex;
+    align-items: center;
+  }
+
+  a {
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 12px 12px;
+    margin: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: Roboto, sans-serif;
+
+    &:hover {
+      background-color: #ff0000;
+      color: #ffffff;
+      border-radius: 15px;
+    }
+
+    &.active {
+      background-color: #ff0000;
+      color: #ffffff;
+      border-radius: 15px;
+    }
+  }
+
+  .icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    a {
+      display: none;
+    }
+    .icon {
+      display: block;
+      margin-left: auto; // Ensures the icon stays at the right edge
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    a {
+      display: none;
+    }
+    .icon {
+      margin-top: -15px;
+    }
+    img#logo {
+      width: 103px;
+      height: 19px;
+      margin-top: -15px;
+    }
+  }
+
+  &.responsive {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .icon {
+      align-self: flex-end;
+    }
+
+    a {
+      display: block;
+      float: none;
+      text-align: left;
+    }
+  }
+}

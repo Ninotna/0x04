@@ -154,7 +154,7 @@ function validateForm() {
   isValid &= validateBirthdate(); // Valide la date de naissance
   isValid &= validateQuantity(); // Valide le nombre de tournois
   isValid &= validateTerms(); // Valide les conditions générales
-  return !!isValid; // Retourne true si tout est valide, sinon false
+  return isValid; // Retourne true si tout est valide, sinon false
 }
 
 // Fonction pour afficher une erreur
@@ -262,3 +262,29 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 });
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Sélectionner tous les éléments de navigation
+  const navItems = document.querySelectorAll('.nav-item');
+
+  // Ajouter un gestionnaire d'événements pour chaque élément de navigation
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      // Supprimer la classe 'active' de tous les éléments de navigation
+      navItems.forEach(nav => nav.classList.remove('active'));
+      // Ajouter la classe 'active' à l'élément de navigation cliqué
+      item.classList.add('active');
+    });
+  });
+});
+
+// Fonction pour basculer le menu responsive
+function toggleMenu() {
+  const topnav = document.querySelector('.topnav');
+  // Vérifier si la classe 'responsive' est déjà appliquée
+  if (topnav.className === 'topnav') {
+    topnav.className += ' responsive';
+  } else {
+    topnav.className = 'topnav';
+  }
+}

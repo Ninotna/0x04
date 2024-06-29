@@ -1,0 +1,42 @@
+.modal-btn, .button, .btn-signup {
+	font-size: 1.3rem;
+	background: #fe142f;
+	display: inline-block;
+	margin: 10px auto;
+	padding: 12px 24px;
+	color: #fff;
+	border-radius: 8px;
+	cursor: pointer;
+	text-align: center;
+
+	&:hover {
+		background: #3876ac;
+	}
+}
+
+.btn-signup {
+	outline: none;
+	text-transform: capitalize;
+	font-size: 1.3rem;
+	padding: 12px 24px;
+	margin: 20px 0;
+	display: block;
+	background: #fe142f;
+	color: #fff;
+	border-radius: 8px;
+	cursor: pointer;
+	text-align: center;
+
+	&:hover {
+		background: #3876ac;
+	}
+
+	// Hide the button outside hero section on desktop
+	&.outside-hero {
+		display: none;
+
+		@media screen and (max-width: 800px) {
+			display: block;
+		}
+	}
+}
