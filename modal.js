@@ -22,14 +22,14 @@ function editNav() {
 // Fonction pour afficher la modale
 function launchModal() {
   modalbg.style.display = "block"; // Définit le style d'affichage du fond de la modale sur 'block' pour l'afficher
-  document.body.classList.add('no-scroll'); // Ajoute la classe no-scroll à l'élément body pour désactiver le défilement
+  document.body.style.overflow = 'hidden'; // Désactiver le scroll
   document.body.classList.add('modal-open'); // Ajoute la classe modal-open à l'élément body pour afficher l'overlay
 }
 
 // Fonction pour fermer la modale de formulaire
 function closeFormModal() {
   modalbg.style.display = "none"; // Définit le style d'affichage du fond de la modale sur 'none' pour le cacher
-  document.body.classList.remove('no-scroll'); // Retire la classe no-scroll de l'élément body pour réactiver le défilement
+  document.body.style.overflow = 'auto'; // Activer le scroll
   document.body.classList.remove('modal-open'); // Retire la classe modal-open de l'élément body pour masquer l'overlay
 }
 
@@ -37,7 +37,7 @@ function closeFormModal() {
 function closeSuccessModal() {
   successModal.style.display = 'none'; // Masque la modale de succès
   modalbg.style.display = "none"; // Masque également l'élément de fond de la modale
-  document.body.classList.remove('no-scroll'); // Réactive le défilement de la page
+  document.body.style.overflow = 'auto'; // Activer le scroll
   document.body.classList.remove('modal-open'); // Retire la classe modal-open de l'élément body pour masquer l'overlay
 }
 
@@ -255,6 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modalMessage.innerHTML = `Merci <strong>${firstName}</strong>, votre formulaire a été soumis avec succès !`; // Affiche un message de succès avec le prénom
         modalForm.style.display = 'none'; // Masque la modale de formulaire
         successModal.style.display = 'block'; // Affiche la modale avec le message de succès
+        document.body.style.overflow = 'hidden'; // Désactiver le scroll
         console.log('Formulaire soumis avec succès');
     } else {
         console.log(`Le formulaire n'est pas valide. Champs non valides : ${invalidFields.join(', ')}`);
