@@ -21,16 +21,16 @@ function editNav() {
 
 // Fonction pour afficher la modale
 function launchModal() {
-  modalbg.style.display = "block"; // Définit le style d'affichage du fond de la modale sur 'block' pour l'afficher
-  document.body.style.overflow = 'hidden'; // Désactiver le scroll
-  document.body.classList.add('modal-open'); // Ajoute la classe modal-open à l'élément body pour afficher l'overlay
+  modalbg.style.display = "block"; // Affiche le fond de la modale
+  document.body.style.overflow = 'hidden'; // Désactive le scroll
+  // document.body.classList.add('modal-open'); // Ajoute la classe modal-open à l'élément body pour afficher l'overlay
 }
 
 // Fonction pour fermer la modale de formulaire
 function closeFormModal() {
   modalbg.style.display = "none"; // Définit le style d'affichage du fond de la modale sur 'none' pour le cacher
   document.body.style.overflow = 'auto'; // Activer le scroll
-  document.body.classList.remove('modal-open'); // Retire la classe modal-open de l'élément body pour masquer l'overlay
+  // document.body.classList.remove('modal-open'); // Retire la classe modal-open de l'élément body pour masquer l'overlay
 }
 
 // Fonction pour fermer la modale de succès et réactiver la page principale

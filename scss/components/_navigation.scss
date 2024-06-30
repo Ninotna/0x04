@@ -6,6 +6,10 @@
   background-color: #fff;
   flex-wrap: wrap;
 
+  @media screen and (max-width: 768px) {
+    padding: 25px 0;
+  }
+
   .responsive {
     flex-direction: row;
   }
@@ -35,10 +39,11 @@
       background-color: #ff0000;
       color: #ffffff;
       border-radius: 15px;
+
       @media screen and (min-width: 768px) {
 
-          display: none;
-        }
+        display: none;
+      }
     }
 
     &.active {
@@ -50,6 +55,8 @@
 
   .icon {
     display: none;
+    color: red;
+    flex-shrink: 0;
   }
 
   @media screen and (max-width: 768px) {
@@ -93,18 +100,20 @@
 
     .icon .fa {
       align-self: center;
-          @media screen and (min-width: 768px) {
-      display: none;
-    }
+
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
     }
 
     .icon .fa a {
       display: block;
       float: none;
       text-align: left;
-          @media screen and (min-width: 768px) {
-      display: none;
-    }
+
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
     }
 
 

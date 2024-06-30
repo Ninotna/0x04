@@ -1,9 +1,10 @@
-label {
+label, .text-label {
 	font-family: var(--font-default);
-	font-size: 17px;
+	font-size: 14px;
 	font-weight: normal;
 	display: inline-block;
-	margin-bottom: 11px;
+	// margin-bottom: 11px;
+	margin: 11px auto;
 }
 
 input {
@@ -17,7 +18,7 @@ input {
 	padding: 8px;
 	width: 100%;
 	border-radius: 8px;
-	font-size: 20px;
+	font-size: 14px;
 	height: 48px;
 }
 
@@ -86,12 +87,12 @@ input {
 	display: none;
 }
 
-.checkbox-input:checked + .checkbox-label .checkbox-icon::after,
-.checkbox-input:checked + .checkbox2-label .checkbox-icon::after {
+.checkbox-input:checked+.checkbox-label .checkbox-icon::after,
+.checkbox-input:checked+.checkbox2-label .checkbox-icon::after {
 	opacity: 1;
 }
 
-.checkbox-input:checked + .checkbox2-label .checkbox-icon {
+.checkbox-input:checked+.checkbox2-label .checkbox-icon {
 	background: #279e7a;
 }
 
@@ -118,77 +119,116 @@ input {
 .btn-signup {
 	background: #fe142f;
 	display: block;
-	margin: 0 auto;
+	margin: 15px auto 10px auto;
 	border-radius: 7px;
 	font-size: 1rem;
-	padding: 12px 82px;
+	padding: 8px 56px 14px 56px;
 	color: #fff;
 	cursor: pointer;
 	border: 0;
+	// width:100%;
+	@media screen and (max-width: 768px) {
+		padding: 6px 36px;
+		margin-top:60px;
+	  }
 }
 
 
 /* Ajout d'un container pour afficher sur une ligne le checker */
-.input-container { 
-    display: flex; /* Définit l'affichage en flexbox */
-    align-items: center; /* Aligne les éléments au centre verticalement */
-  }
-  
-  .validation-indicator { 
-    display: none; /* Masque l'indicateur de validation par défaut */
-    color: green; /* Définit la couleur du texte en vert */
-    font-weight: bold; /* Met le texte en gras */
-    margin-left: 10px; /* Ajoute une marge à gauche de 10px */
-  }
-  
-  .validation-indicator.valid { 
-    display: inline; /* Affiche l'indicateur de validation quand il a la classe 'valid' */
-  }
-  
-  /* Ajout d'un validateur css visuel */
-  .formData[data-error]::after { 
-    content: attr(data-error); /* Affiche le message d'erreur contenu dans l'attribut data-error */
-    font-size: 1rem; /* Définit la taille de la police à 1rem */
-    color: #e54858; /* Définit la couleur du texte en rouge */
-    display: block; /* Affiche le message d'erreur en bloc */
-    text-align:left; /* Affiche le texte à gauche */
-    opacity: 0; /* Masque le message d'erreur par défaut */
-    transition: opacity 0.3s; /* Ajoute une transition pour l'opacité de 0.3s */
-    white-space: pre-wrap; /* Permet de conserver les sauts de ligne et force les retours à la ligne */
-  }
-  
-  .formData[data-error-visible="true"]::after { 
-    opacity: 1; /* Affiche le message d'erreur quand data-error-visible est 'true' */
-  }
-  
-  .formData[data-error-visible="true"] .text-control { 
-    border: 2px solid #e54858; /* Ajoute une bordure rouge de 2px aux champs de texte en erreur */
-  }
-  
-  .validation-indicator { 
-    display: none; /* Masque l'indicateur de validation par défaut */
-    color: green; /* Définit la couleur du texte en vert */
-    font-weight: bold; /* Met le texte en gras */
-    margin-left: 10px; /* Ajoute une marge à gauche de 10px */
-  }
-  
-  .validation-indicator.valid { 
-    display: inline; /* Affiche l'indicateur de validation quand il a la classe 'valid' */
-  }
-  
-  /* Ajout d'un container pour afficher sur une ligne le checker */
-  .input-container { 
-    display: flex; /* Définit l'affichage en flexbox */
-    align-items: center; /* Aligne les éléments au centre verticalement */
-  }
-  
-  .validation-indicator { 
-    display: none; /* Masque l'indicateur de validation par défaut */
-    color: green; /* Définit la couleur du texte en vert */
-    font-weight: bold; /* Met le texte en gras */
-    margin-left: 10px; /* Ajoute une marge à gauche de 10px */
-  }
-  
-  .validation-indicator.valid { 
-    display: inline; /* Affiche l'indicateur de validation quand il a la classe 'valid' */
-  }
+.input-container {
+	display: flex;
+	/* Définit l'affichage en flexbox */
+	align-items: center;
+	/* Aligne les éléments au centre verticalement */
+}
+
+.validation-indicator {
+	display: none;
+	/* Masque l'indicateur de validation par défaut */
+	color: green;
+	/* Définit la couleur du texte en vert */
+	font-weight: bold;
+	/* Met le texte en gras */
+	margin-left: 10px;
+	/* Ajoute une marge à gauche de 10px */
+}
+
+.validation-indicator.valid {
+	display: inline;
+	/* Affiche l'indicateur de validation quand il a la classe 'valid' */
+}
+
+/* Ajout d'un validateur css visuel */
+.formData[data-error]::after {
+	content: attr(data-error);
+	/* Affiche le message d'erreur contenu dans l'attribut data-error */
+	font-size: 14px;
+	/* Définit la taille de la police à 1rem */
+	color: #e54858;
+	/* Définit la couleur du texte en rouge */
+	display: block;
+	/* Affiche le message d'erreur en bloc */
+	text-align: left;
+	/* Affiche le texte à gauche */
+	opacity: 0;
+	/* Masque le message d'erreur par défaut */
+	transition: opacity 0.3s;
+	/* Ajoute une transition pour l'opacité de 0.3s */
+	white-space: pre-wrap;
+	/* Permet de conserver les sauts de ligne et force les retours à la ligne */
+
+	@media screen and (max-width: 768px) {
+		font-size: 12px;
+		/* Définit la taille au format mobile. */
+	}
+}
+
+.formData[data-error-visible="true"]::after {
+	opacity: 1;
+	/* Affiche le message d'erreur quand data-error-visible est 'true' */
+}
+
+.formData[data-error-visible="true"] .text-control {
+	border: 2px solid #e54858;
+	/* Ajoute une bordure rouge de 2px aux champs de texte en erreur */
+}
+
+.validation-indicator {
+	display: none;
+	/* Masque l'indicateur de validation par défaut */
+	color: green;
+	/* Définit la couleur du texte en vert */
+	font-weight: bold;
+	/* Met le texte en gras */
+	margin-left: 10px;
+	/* Ajoute une marge à gauche de 10px */
+}
+
+.validation-indicator.valid {
+	display: inline;
+	/* Affiche l'indicateur de validation quand il a la classe 'valid' */
+}
+
+/* Ajout d'un container pour afficher sur une ligne le checker */
+.input-container {
+	display: flex;
+	/* Définit l'affichage en flexbox */
+	align-items: center;
+	/* Aligne les éléments au centre verticalement */
+}
+
+.validation-indicator {
+	display: none;
+	/* Masque l'indicateur de validation par défaut */
+	color: green;
+	/* Définit la couleur du texte en vert */
+	font-weight: bold;
+	/* Met le texte en gras */
+	margin-left: 10px;
+	/* Ajoute une marge à gauche de 10px */
+}
+
+.validation-indicator.valid {
+	display: inline;
+	/* Affiche l'indicateur de validation quand il a la classe 'valid' */
+}

@@ -17,6 +17,7 @@ body {
   flex-direction: column;
   font-family: var(--font-default);
   font-size: 18px;
+  height: 100%;
 }
 
 p {
@@ -38,9 +39,17 @@ img {
   }
 }
 .container-center {
-  max-width: 1080px;
-  margin-left: 30px;
-  margin-right: 30px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 30px;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  flex: 1;
 }
 
 .topnav {
@@ -50,6 +59,11 @@ img {
   padding: 33px 0;
   background-color: #fff;
   flex-wrap: wrap;
+}
+@media screen and (max-width: 768px) {
+  .topnav {
+    padding: 25px 0;
+  }
 }
 .topnav .responsive {
   flex-direction: row;
@@ -90,6 +104,8 @@ img {
 }
 .topnav .icon {
   display: none;
+  color: red;
+  flex-shrink: 0;
 }
 @media screen and (max-width: 768px) {
   .topnav a {
@@ -209,35 +225,27 @@ img {
   height: 100%;
   width: 100%;
   overflow: auto;
-  background-color: rgba(26, 39, 156, 0.4);
+  background-color: rgb(255, 255, 255);
 }
-
-.content {
-  margin: 5% auto;
-  width: 100%;
-  max-width: 500px;
-  animation-name: modalopen;
-  animation-duration: var(--modal-duration);
-  background: #232323;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  color: #fff;
-  padding-top: 10px;
-  height: 100%;
+@media screen and (max-width: 768px) {
+  .bground {
+    background-color: rgba(255, 255, 255, 0);
+  }
 }
 
 .modal-body {
   padding: 15px 8%;
-  margin: 15px auto;
+  margin: 5px auto;
+  height: calc(100% - 80px);
+  height: 100%;
 }
 
 .close {
   position: absolute;
-  right: 15px;
-  top: 15px;
-  width: 32px;
-  height: 32px;
+  right: 20px;
+  top: 12px;
+  width: 15px;
+  height: 15px;
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
@@ -246,7 +254,7 @@ img {
   position: absolute;
   left: 15px;
   content: " ";
-  height: 33px;
+  height: 15px;
   width: 3px;
   background-color: #fff;
 }
@@ -257,6 +265,60 @@ img {
   transform: rotate(-45deg);
 }
 
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* noir semi-transparent */
+  z-index: 1000;
+  /* Assurez-vous que l'overlay est au-dessus du contenu principal */
+  display: none;
+  /* Masqué par défaut */
+}
+
+/* Styles pour les deux modales */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.modal-content {
+  background-color: #232323;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  color: #fff;
+  position: relative;
+  max-height: 1000px;
+  z-index: 1200;
+  height: 100%;
+  max-height: 80%;
+  top: 80px;
+  min-height: calc(100% - 80px);
+}
+@media screen and (max-width: 768px) {
+  .modal-content {
+    top: 60px;
+    width: 100%;
+    max-width: none;
+    padding: 14px;
+    min-height: calc(100% - 60px);
+  }
+}
+
 /* Styles spécifiques pour la modale de succès */
 .success-modal-content {
   display: flex;
@@ -264,65 +326,8 @@ img {
   justify-content: space-between;
   background-color: #232323;
   border: 1px solid #888;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(255, 255, 255); /* Blanc semi-transparent */
-  z-index: 1; /* Assurez-vous que l'overlay est au-dessus du contenu mais en dessous des modales */
-  display: none; /* Masqué par défaut */
-}
-
-.modal-open .modal-overlay {
-  display: block; /* Affiche l'overlay lorsque la classe modal-open est présente sur le body */
-}
-
-/* Styles pour les deux modales */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 5;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: #232323;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  text-align: center;
-  border-radius: 10px;
-  color: #fff;
-  position: relative;
-  max-height: 700px;
-  height: 700px;
-  z-index: 5;
-}
-
-.close-modal {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  text-align: right;
-}
-
-.close-modal:hover,
-.close-modal:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+  z-index: 1200;
+  /* Doit être plus élevé que celui de l'overlay et de la modale */
 }
 
 .success-message {
@@ -330,29 +335,40 @@ img {
   color: #fff;
   margin-bottom: 20px;
 }
+@media screen and (max-width: 768px) {
+  .success-message {
+    text-align: center;
+  }
+}
 
 .close-button {
   background-color: #fe142f;
   color: white;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 8px 56px 14px 56px;
+  font-size: 15px;
   cursor: pointer;
   border-radius: 15px;
   width: 183px;
   align-self: center;
 }
-
-.close-button:hover {
-  background-color: #c33;
+@media screen and (max-width: 768px) {
+  .close-button {
+    padding: 6px 36px;
+    margin-top: 60px;
+  }
 }
 
-label {
+.close-button:hover {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+label, .text-label {
   font-family: var(--font-default);
-  font-size: 17px;
+  font-size: 14px;
   font-weight: normal;
   display: inline-block;
-  margin-bottom: 11px;
+  margin: 11px auto;
 }
 
 input {
@@ -366,7 +382,7 @@ input {
   padding: 8px;
   width: 100%;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: 14px;
   height: 48px;
 }
 
@@ -467,78 +483,120 @@ input {
 .btn-signup {
   background: #fe142f;
   display: block;
-  margin: 0 auto;
+  margin: 15px auto 10px auto;
   border-radius: 7px;
   font-size: 1rem;
-  padding: 12px 82px;
+  padding: 8px 56px 14px 56px;
   color: #fff;
   cursor: pointer;
   border: 0;
 }
+@media screen and (max-width: 768px) {
+  .btn-submit,
+  .btn-signup {
+    padding: 6px 36px;
+    margin-top: 60px;
+  }
+}
 
 /* Ajout d'un container pour afficher sur une ligne le checker */
 .input-container {
-  display: flex; /* Définit l'affichage en flexbox */
-  align-items: center; /* Aligne les éléments au centre verticalement */
+  display: flex;
+  /* Définit l'affichage en flexbox */
+  align-items: center;
+  /* Aligne les éléments au centre verticalement */
 }
 
 .validation-indicator {
-  display: none; /* Masque l'indicateur de validation par défaut */
-  color: green; /* Définit la couleur du texte en vert */
-  font-weight: bold; /* Met le texte en gras */
-  margin-left: 10px; /* Ajoute une marge à gauche de 10px */
+  display: none;
+  /* Masque l'indicateur de validation par défaut */
+  color: green;
+  /* Définit la couleur du texte en vert */
+  font-weight: bold;
+  /* Met le texte en gras */
+  margin-left: 10px;
+  /* Ajoute une marge à gauche de 10px */
 }
 
 .validation-indicator.valid {
-  display: inline; /* Affiche l'indicateur de validation quand il a la classe 'valid' */
+  display: inline;
+  /* Affiche l'indicateur de validation quand il a la classe 'valid' */
 }
 
 /* Ajout d'un validateur css visuel */
 .formData[data-error]::after {
-  content: attr(data-error); /* Affiche le message d'erreur contenu dans l'attribut data-error */
-  font-size: 1rem; /* Définit la taille de la police à 1rem */
-  color: #e54858; /* Définit la couleur du texte en rouge */
-  display: block; /* Affiche le message d'erreur en bloc */
-  text-align: left; /* Affiche le texte à gauche */
-  opacity: 0; /* Masque le message d'erreur par défaut */
-  transition: opacity 0.3s; /* Ajoute une transition pour l'opacité de 0.3s */
-  white-space: pre-wrap; /* Permet de conserver les sauts de ligne et force les retours à la ligne */
+  content: attr(data-error);
+  /* Affiche le message d'erreur contenu dans l'attribut data-error */
+  font-size: 14px;
+  /* Définit la taille de la police à 1rem */
+  color: #e54858;
+  /* Définit la couleur du texte en rouge */
+  display: block;
+  /* Affiche le message d'erreur en bloc */
+  text-align: left;
+  /* Affiche le texte à gauche */
+  opacity: 0;
+  /* Masque le message d'erreur par défaut */
+  transition: opacity 0.3s;
+  /* Ajoute une transition pour l'opacité de 0.3s */
+  white-space: pre-wrap;
+  /* Permet de conserver les sauts de ligne et force les retours à la ligne */
+}
+@media screen and (max-width: 768px) {
+  .formData[data-error]::after {
+    font-size: 12px;
+    /* Définit la taille au format mobile. */
+  }
 }
 
 .formData[data-error-visible=true]::after {
-  opacity: 1; /* Affiche le message d'erreur quand data-error-visible est 'true' */
+  opacity: 1;
+  /* Affiche le message d'erreur quand data-error-visible est 'true' */
 }
 
 .formData[data-error-visible=true] .text-control {
-  border: 2px solid #e54858; /* Ajoute une bordure rouge de 2px aux champs de texte en erreur */
+  border: 2px solid #e54858;
+  /* Ajoute une bordure rouge de 2px aux champs de texte en erreur */
 }
 
 .validation-indicator {
-  display: none; /* Masque l'indicateur de validation par défaut */
-  color: green; /* Définit la couleur du texte en vert */
-  font-weight: bold; /* Met le texte en gras */
-  margin-left: 10px; /* Ajoute une marge à gauche de 10px */
+  display: none;
+  /* Masque l'indicateur de validation par défaut */
+  color: green;
+  /* Définit la couleur du texte en vert */
+  font-weight: bold;
+  /* Met le texte en gras */
+  margin-left: 10px;
+  /* Ajoute une marge à gauche de 10px */
 }
 
 .validation-indicator.valid {
-  display: inline; /* Affiche l'indicateur de validation quand il a la classe 'valid' */
+  display: inline;
+  /* Affiche l'indicateur de validation quand il a la classe 'valid' */
 }
 
 /* Ajout d'un container pour afficher sur une ligne le checker */
 .input-container {
-  display: flex; /* Définit l'affichage en flexbox */
-  align-items: center; /* Aligne les éléments au centre verticalement */
+  display: flex;
+  /* Définit l'affichage en flexbox */
+  align-items: center;
+  /* Aligne les éléments au centre verticalement */
 }
 
 .validation-indicator {
-  display: none; /* Masque l'indicateur de validation par défaut */
-  color: green; /* Définit la couleur du texte en vert */
-  font-weight: bold; /* Met le texte en gras */
-  margin-left: 10px; /* Ajoute une marge à gauche de 10px */
+  display: none;
+  /* Masque l'indicateur de validation par défaut */
+  color: green;
+  /* Définit la couleur du texte en vert */
+  font-weight: bold;
+  /* Met le texte en gras */
+  margin-left: 10px;
+  /* Ajoute une marge à gauche de 10px */
 }
 
 .validation-indicator.valid {
-  display: inline; /* Affiche l'indicateur de validation quand il a la classe 'valid' */
+  display: inline;
+  /* Affiche l'indicateur de validation quand il a la classe 'valid' */
 }
 
 .hero-section {
@@ -666,7 +724,7 @@ input {
   }
   .hero-section .hero-img img {
     border-radius: 10px;
-    margin-top: 40px;
+    margin-top: 36px;
   }
   .hero-section .btn-signup {
     display: block;
@@ -684,7 +742,7 @@ input {
 .copyrights {
   color: #fe142f;
   padding: 0;
-  font-size: 1rem;
+  font-size: 15px;
   margin: 60px 0 30px;
   font-weight: bolder;
   text-align: center;
