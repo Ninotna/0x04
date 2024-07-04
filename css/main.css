@@ -60,23 +60,18 @@ img {
   background-color: #fff;
   flex-wrap: wrap;
 }
-@media screen and (max-width: 768px) {
-  .topnav {
-    padding: 25px 0;
-  }
-}
-.topnav .responsive {
-  flex-direction: row;
-}
-.topnav .header-logo {
+
+.header-logo {
   display: flex;
   align-items: center;
 }
-.topnav .main-navbar {
+
+.main-navbar {
   display: flex;
   align-items: center;
 }
-.topnav a {
+
+a {
   float: left;
   display: block;
   color: #000000;
@@ -87,48 +82,50 @@ img {
   font-size: 20px;
   font-family: Roboto, sans-serif;
 }
-.topnav a:hover {
+
+a:hover {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
 }
-@media screen and (min-width: 768px) {
-  .topnav a:hover {
-    display: none;
-  }
-}
-.topnav a.active {
+
+a.active {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
 }
-.topnav .icon {
+
+.icon {
   display: none;
   color: red;
   flex-shrink: 0;
 }
+
 @media screen and (max-width: 768px) {
-  .topnav a {
+  .topnav {
+    padding: 25px 0;
+  }
+  a {
     display: none;
   }
-  .topnav .icon {
+  .icon {
     display: block;
   }
-  .topnav img#logo {
+  img#logo {
     width: 103px;
     height: 19px;
     margin-top: -15px;
   }
 }
 @media screen and (max-width: 540px) {
-  .topnav a {
+  a {
     display: none;
   }
-  .topnav .icon {
+  .icon {
     margin-top: -15px;
     margin-left: 0px;
   }
-  .topnav img#logo {
+  img#logo {
     width: 103px;
     height: 19px;
     margin-top: -15px;
@@ -138,40 +135,22 @@ img {
   flex-direction: column;
   flex-wrap: nowrap;
 }
-.topnav.responsive .icon .fa {
-  align-self: center;
+
+.topnav.responsive .main-navbar {
+  flex-direction: column;
+  align-items: flex-start;
 }
-@media screen and (min-width: 768px) {
-  .topnav.responsive .icon .fa {
-    display: none;
-  }
-}
-.topnav.responsive .icon .fa a {
-  display: block;
-  float: none;
-  text-align: left;
-}
-@media screen and (min-width: 768px) {
-  .topnav.responsive .icon .fa a {
-    display: none;
-  }
-}
+
 .topnav.responsive a {
   display: block;
   float: none;
   text-align: left;
 }
-.topnav.responsive .main-navbar {
-  flex-direction: row;
-  flex-wrap: nowrap;
+
+.topnav.responsive .icon {
+  align-self: center;
 }
-@media screen and (max-width: 800px) {
-  .topnav.responsive .main-navbar {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-}
+
 .topnav.responsive img#logo {
   padding-right: 0px;
 }
