@@ -8,8 +8,9 @@
   width: 100%;
   overflow: auto;
   background-color: rgba(255, 255, 255, 1);
-  @media screen and (max-width: 768px) {
-    background-color: rgba(255, 255, 255, 0);
+  @media screen and (max-width: 540px) {
+    top: 8%;
+    // background-color: rgba(255, 255, 255, 0);
   }
 }
 
@@ -91,21 +92,23 @@
   max-height: 1000px;
   z-index: 1200;
   height: 100%;
-  max-height:80%;
   top:80px;
   min-height: calc(100% - 80px);
 
-  @media screen and (max-width: 768px) {
-    top:60px;
+  @media screen and (max-width: 540px) {
+    top:0;
     width:100%;
+    max-width:500px;
     // margin: 0;
-    max-width: none;
     // min-height:900px;
     // height: calc(100% - 60px);
-    // height: 100%;
-    padding: 14px;
-    min-height: calc(100% - 60px);
-
+    height: 100%;
+    padding: 20px;
+    // min-height: calc(100% - 60px);
+  }
+  @media screen and (max-width: 540px) {
+    top:0;
+    padding: 5px;
   }
 }
 
@@ -120,20 +123,11 @@
   /* Doit être plus élevé que celui de l'overlay et de la modale */
 }
 
-// .close-modal {
-//   color: #aaa;
-//   float: right;
-//   font-size: 15px;
-//   font-weight: bold;
-//   text-align: right;
-// }
+.close-modal {
+align-self: flex-end;
+cursor: pointer;
+}
 
-// .close-modal:hover,
-// .close-modal:focus {
-//   color: black;
-//   text-decoration: none;
-//   cursor: pointer;
-// }
 
 .success-message {
   font-size: 1.5rem;

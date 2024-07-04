@@ -38,7 +38,28 @@ function closeSuccessModal() {
   successModal.style.display = 'none'; // Masque la modale de succès
   modalbg.style.display = "none"; // Masque également l'élément de fond de la modale
   document.body.style.overflow = 'auto'; // Activer le scroll
-  document.body.classList.remove('modal-open'); // Retire la classe modal-open de l'élément body pour masquer l'overlay
+  document.body.classList.remove('modal-open'); // Retire la classe modal-open de l'élément body
+
+  // Réinitialiser les champs du formulaire
+  form.reset();
+
+  // Effacer les erreurs et indicateurs de validation
+  clearError('first');
+  clearError('last');
+  clearError('email');
+  clearError('birthdate');
+  clearError('quantity');
+  clearError('checkbox1');
+
+  hideValid('first-valid');
+  hideValid('last-valid');
+  hideValid('email-valid');
+  hideValid('birthdate-valid');
+  hideValid('quantity-valid');
+  hideValid('checkbox1-valid');
+
+  // Réinitialiser l'affichage de la modale de formulaire
+  modalForm.style.display = 'block';
 }
 
 // Fonction pour valider le prénom

@@ -19,6 +19,10 @@
     position: relative;
     text-align: left;
     min-width: 424px;
+    @media screen and (max-width: 450px) {
+    min-width: 300px;
+    }
+
 
     &::after {
       content: "";
@@ -45,6 +49,9 @@
       font-weight: 500;
       line-height: normal;
 
+
+
+
       @media screen and (max-width: 800px) {
         color: #000;
         font-family: "DM Sans";
@@ -52,6 +59,9 @@
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+      }
+      @media screen and (max-width: 450px) {
+        font-size: 25px;
       }
     }
 
@@ -74,6 +84,9 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+      }
+      @media screen and (max-width: 450px) {
+        white-space: pre-wrap;
       }
     }
 

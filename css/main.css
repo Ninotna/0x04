@@ -89,6 +89,13 @@ a:hover {
   border-radius: 15px;
 }
 
+/* Cible le lien du logo et retire les styles de survol */
+#logo-link:hover {
+  background-color: transparent;
+  color: inherit;
+  border-radius: 0;
+}
+
 a.active {
   background-color: #ff0000;
   color: #ffffff;
@@ -101,12 +108,15 @@ a.active {
   flex-shrink: 0;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .topnav {
     padding: 25px 0;
   }
   a {
     display: none;
+  }
+  #logo-link {
+    display: flex; /* Assurer que le logo est visible */
   }
   .icon {
     display: block;
@@ -121,6 +131,9 @@ a.active {
   a {
     display: none;
   }
+  #logo-link {
+    display: flex; /* Assurer que le logo est visible */
+  }
   .icon {
     margin-top: -15px;
     margin-left: 0px;
@@ -131,6 +144,21 @@ a.active {
     margin-top: -15px;
   }
 }
+@media screen and (min-width: 1024px) {
+  .topnav {
+    flex-direction: row;
+  }
+  .main-navbar {
+    flex-direction: row;
+    align-items: center;
+  }
+  .topnav a {
+    display: block;
+  }
+  .icon {
+    display: none !important; /* Masquer l'icône du menu de manière stricte */
+  }
+}
 .topnav.responsive {
   flex-direction: column;
   flex-wrap: nowrap;
@@ -138,13 +166,17 @@ a.active {
 
 .topnav.responsive .main-navbar {
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .topnav.responsive a {
   display: block;
   float: none;
   text-align: left;
+}
+
+.topnav.responsive #logo-link {
+  display: flex; /* Assurer que le logo est visible */
 }
 
 .topnav.responsive .icon {
@@ -206,9 +238,9 @@ a.active {
   overflow: auto;
   background-color: rgb(255, 255, 255);
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 540px) {
   .bground {
-    background-color: rgba(255, 255, 255, 0);
+    top: 8%;
   }
 }
 
@@ -284,17 +316,22 @@ a.active {
   max-height: 1000px;
   z-index: 1200;
   height: 100%;
-  max-height: 80%;
   top: 80px;
   min-height: calc(100% - 80px);
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 540px) {
   .modal-content {
-    top: 60px;
+    top: 0;
     width: 100%;
-    max-width: none;
-    padding: 14px;
-    min-height: calc(100% - 60px);
+    max-width: 500px;
+    height: 100%;
+    padding: 20px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .modal-content {
+    top: 0;
+    padding: 5px;
   }
 }
 
@@ -307,6 +344,11 @@ a.active {
   border: 1px solid #888;
   z-index: 1200;
   /* Doit être plus élevé que celui de l'overlay et de la modale */
+}
+
+.close-modal {
+  align-self: flex-end;
+  cursor: pointer;
 }
 
 .success-message {
@@ -348,6 +390,11 @@ label, .text-label {
   font-weight: normal;
   display: inline-block;
   margin: 11px auto;
+}
+@media screen and (max-width: 540px) and (max-width: 350px) {
+  label, .text-label {
+    margin: 10px auto;
+  }
 }
 
 input {
@@ -462,10 +509,10 @@ input {
 .btn-signup {
   background: #fe142f;
   display: block;
-  margin: 15px auto 10px auto;
+  margin: 30px auto 10px auto;
   border-radius: 7px;
   font-size: 1rem;
-  padding: 8px 56px 14px 56px;
+  padding: 8px 56px 8px 56px;
   color: #fff;
   cursor: pointer;
   border: 0;
@@ -473,8 +520,18 @@ input {
 @media screen and (max-width: 768px) {
   .btn-submit,
   .btn-signup {
-    padding: 6px 36px;
-    margin-top: 60px;
+    padding: 6px 56px;
+    margin-top: 30px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .btn-submit,
+  .btn-signup {
+    position: fixed;
+    padding: 6px 56px;
+    margin-top: 30px;
+    bottom: 20px;
+    left: 30%;
   }
 }
 
@@ -601,6 +658,11 @@ input {
   text-align: left;
   min-width: 424px;
 }
+@media screen and (max-width: 450px) {
+  .hero-section .hero-content {
+    min-width: 300px;
+  }
+}
 .hero-section .hero-content::after {
   content: "";
   width: 100%;
@@ -634,6 +696,11 @@ input {
     line-height: normal;
   }
 }
+@media screen and (max-width: 450px) {
+  .hero-section .hero-content .hero-headline {
+    font-size: 25px;
+  }
+}
 .hero-section .hero-content .hero-text {
   width: 100%;
   font-weight: normal;
@@ -654,6 +721,11 @@ input {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+}
+@media screen and (max-width: 450px) {
+  .hero-section .hero-content .hero-text {
+    white-space: pre-wrap;
   }
 }
 .hero-section .hero-content .btn-signup {
