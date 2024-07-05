@@ -65,8 +65,11 @@ function closeSuccessModal() {
 // Fonction pour valider le prénom
 function validateFirstName() {
   const firstName = form['first'].value.trim(); // Récupère et nettoie la valeur du prénom
-  if (firstName.length < 2) { // Vérifie si la longueur du prénom est inférieure à 2 caractères
-    displayError('first', 'Le prénom doit contenir au moins 2 caractères.'); // Affiche un message d'erreur pour le prénom
+  const regex = /^[a-zA-ZÀ-ÿ-]+$/; /* Regex pour accepter uniquement les lettres et les tirets */
+
+	if (firstName.length < 2 || !regex.test(firstName)) // Vérifie si la longueur du prénom est inférieure à 2 caractère et le respect du regex
+	{
+    displayError('first', 'Le prénom doit contenir au moins 2 lettres.'); // Affiche un message d'erreur pour le prénom
     return false;
   } else {
     clearError('first'); // Efface l'erreur pour le prénom
@@ -78,8 +81,11 @@ function validateFirstName() {
 // Fonction pour valider le nom
 function validateLastName() {
   const lastName = form['last'].value.trim(); // Récupère et nettoie la valeur du nom
-  if (lastName.length < 2) { // Vérifie si la longueur du nom est inférieure à 2 caractères
-    displayError('last', 'Le nom doit contenir au moins 2 caractères.'); // Affiche un message d'erreur pour le nom
+  const regex = /^[a-zA-ZÀ-ÿ-]+$/; /* Regex pour accepter uniquement les lettres et les tirets */
+
+	if (lastName.length < 2 || !regex.test(lastName)) // Vérifie si la longueur du nom est inférieure à 2 caractère et le respect du regex
+	{
+    displayError('last', 'Le nom doit contenir au moins 2 lettres.'); // Affiche un message d'erreur pour le nom
     return false;
   } else {
     clearError('last'); // Efface l'erreur pour le nom
@@ -143,8 +149,11 @@ function isAdult(birthdate) {
 // Fonction pour valider le nombre de tournois
 function validateQuantity() {
   const quantity = form['quantity'].value.trim(); // Récupère et nettoie la valeur du nombre de tournois
-  if (isNaN(quantity) || quantity === '') { // Vérifie si le nombre de tournois n'est pas un nombre ou est vide
-    displayError('quantity', 'Veuillez entrer un nombre valide.'); // Affiche un message d'erreur pour le nombre de tournois
+  const regex = /^\d+$/; /* Regex pour accepter uniquement des entiers nuls ou positifs */
+  
+	if (!regex.test(quantity) || quantity === '')
+    {
+    displayError('quantity', 'Veuillez entrer un nombre positif ou nul.'); // Affiche un message d'erreur pour le nombre de tournois
     return false;
   } else {
     clearError('quantity'); // Efface l'erreur pour le nombre de tournois
