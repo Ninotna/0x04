@@ -65,11 +65,11 @@ function closeSuccessModal() {
 // Fonction pour valider le prénom
 function validateFirstName() {
   const firstName = form['first'].value.trim(); // Récupère et nettoie la valeur du prénom
-  const regex = /^[a-zA-ZÀ-ÿ-]+$/; /* Regex pour accepter uniquement les lettres et les tirets */
+  const regex = /^(?=.*[a-zA-Z]{2,})[a-zA-ZÀ-ÿ-]+$/; /* Regex pour accepter minimum 2 lettres et éventuellement un tiret */
 
 	if (firstName.length < 2 || !regex.test(firstName)) // Vérifie si la longueur du prénom est inférieure à 2 caractère et le respect du regex
 	{
-    displayError('first', 'Le prénom doit contenir au moins 2 lettres.'); // Affiche un message d'erreur pour le prénom
+    displayError('first', 'Le prénom doit contenir minimum 2 lettres.'); // Affiche un message d'erreur pour le prénom
     return false;
   } else {
     clearError('first'); // Efface l'erreur pour le prénom
@@ -81,11 +81,11 @@ function validateFirstName() {
 // Fonction pour valider le nom
 function validateLastName() {
   const lastName = form['last'].value.trim(); // Récupère et nettoie la valeur du nom
-  const regex = /^[a-zA-ZÀ-ÿ-]+$/; /* Regex pour accepter uniquement les lettres et les tirets */
+  const regex = /^(?=.*[a-zA-Z]{2,})[a-zA-ZÀ-ÿ-]+$/; /* Regex pour accepter minimum 2 lettres et éventuellement un tiret */
 
 	if (lastName.length < 2 || !regex.test(lastName)) // Vérifie si la longueur du nom est inférieure à 2 caractère et le respect du regex
 	{
-    displayError('last', 'Le nom doit contenir au moins 2 lettres.'); // Affiche un message d'erreur pour le nom
+    displayError('last', 'Le nom doit contenir minimum 2 lettres.'); // Affiche un message d'erreur pour le nom
     return false;
   } else {
     clearError('last'); // Efface l'erreur pour le nom
